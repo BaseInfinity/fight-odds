@@ -10,6 +10,8 @@ export default class MatchUp {
     }
 
     getSummary() {
-        return `\`${this.home.fullName} (${this.home.getAmericanOdds()}) (${this.home.getWinProbability()}) Vs. ${this.away.fullName} (${this.away.getAmericanOdds()}) (${this.away.getWinProbability()})\``
+        return `
+\`${this.home.fullName} (${this.home.getAmericanOdds()}) (${this.home.getWinProbability()}) Vs. ${this.away.fullName} (${this.away.getAmericanOdds()}) (${this.away.getWinProbability()})\`
+`
     }
 }
