@@ -25,7 +25,7 @@ for (const file of commandFiles) {
 }
 
 const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.endsWith('.js'));
+const eventFiles = fs.readdirSync(eventsPath).filter((file: string) => file.endsWith('.ts'));
 
 for (const file of eventFiles) {
    const filePath = path.join(eventsPath, file);
