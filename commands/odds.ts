@@ -12,7 +12,7 @@ module.exports = {
    data: new SlashCommandBuilder()
       .setName('odds')
       .setDescription('Replies with betting odds')
-      .addStringOption((option: any) => 
+      .addStringOption((option: any) =>
          option.setName('matchup')
             .setDescription('Search for a Competitor in the matchup to find odds for')
             .setAutocomplete(true)
@@ -42,32 +42,43 @@ module.exports = {
 
       const cachedEvents = myCache.get('matchups')
 
+      // Cache miss, lets make an API request
       if (cachedEvents === undefined) {
          axios.get(`https://api.b365api.com/v3/events/upcoming?sport_id=9&token=${b365Token}`)
             .then(async function (eventsResponse: { data: { results: any[]; }; }) {
 
-               const choices = eventsResponse.data.results.sort((a, b) => a.time - b.time)
+               const choices = eventsResponse.data.results.sort((a, b) => a.time - b.time);
 
+               // This filter logic is similar to below but IMO not worth DRYing up unless we need to get
+               // smarter with filtering
                const filtered = choices.filter(choice => {
-                  return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) || choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
+                  return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) ||
+                     choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
                });
 
-               myCache.set('matchups', choices, 3600)
+               myCache.set('matchups', choices, 3600);
 
                // This logic is similar to getSummary, might be worth throwing this into Matchup class
                await interaction.respond(
-                  filtered.map(choice => ({ name: `${choice.home.name} Vs. ${choice.away.name}`, value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id}) })),
+                  filtered.map(choice => ({
+                     name: `${choice.home.name} Vs. ${choice.away.name}`,
+                     value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id})
+                  }))
                );
             });
       } else {
          const choices = cachedEvents
 
-         const filtered = choices.filter((choice: { home: { name: string; }; away: { name: string; }; }) => {
-            return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) || choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
+         const filtered = choices.filter((choice: any) => {
+            return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) ||
+               choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
          });
 
          await interaction.respond(
-            filtered.map((choice: any) => ({ name: `${choice.home.name} Vs. ${choice.away.name}`, value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id }) })),
+            filtered.map((choice: { home: { name: any; }; away: { name: any; }; id: any; }) => ({
+               name: `${choice.home.name} Vs. ${choice.away.name}`,
+               value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id})
+            }))
          );
       }
    }
