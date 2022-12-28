@@ -51,12 +51,17 @@ module.exports = {
 
                // This filter logic is similar to below but IMO not worth DRYing up unless we need to get
                // smarter with filtering
-               const filtered = choices.filter(choice => {
+               let filtered = choices.filter(choice => {
                   return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) ||
                      choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
                });
 
                myCache.set('matchups', choices, 3600);
+
+               if (filtered.length > 25) {
+                  // Hack until I add another option to separate Boxing/UFC results
+                  filtered = filtered.slice(0, 25)
+               }
 
                // This logic is similar to getSummary, might be worth throwing this into Matchup class
                await interaction.respond(
@@ -69,10 +74,15 @@ module.exports = {
       } else {
          const choices = cachedEvents
 
-         const filtered = choices.filter((choice: any) => {
+         let filtered = choices.filter((choice: any) => {
             return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) ||
                choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
          });
+
+         if (filtered.length > 25) {
+            // Hack until I add another option to separate Boxing/UFC results
+            filtered = filtered.slice(0, 25)
+         }
 
          await interaction.respond(
             filtered.map((choice: { home: { name: any; }; away: { name: any; }; id: any; }) => ({
