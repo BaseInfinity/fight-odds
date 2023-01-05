@@ -42,6 +42,9 @@ module.exports = {
 
       const cachedEvents = myCache.get('matchups')
 
+      const ufcEmoji = '👊'
+      const boxingEmoji = '🥊'
+
       // Cache miss, lets make an API request
       if (cachedEvents === undefined) {
          axios.get(`https://api.b365api.com/v3/events/upcoming?sport_id=9&token=${b365Token}`)
@@ -66,7 +69,7 @@ module.exports = {
                // This logic is similar to getSummary, might be worth throwing this into Matchup class
                await interaction.respond(
                   filtered.map(choice => ({
-                     name: `${choice.home.name} Vs. ${choice.away.name} 🥊`,
+                     name: `${choice.home.name} Vs. ${choice.away.name} ${ choice.league.name === "Boxing" ? boxingEmoji : ufcEmoji}`,
                      value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id})
                   }))
                );
@@ -85,8 +88,8 @@ module.exports = {
          }
 
          await interaction.respond(
-            filtered.map((choice: { home: { name: any; }; away: { name: any; }; id: any; }) => ({
-               name: `${choice.home.name} Vs. ${choice.away.name}`,
+            filtered.map((choice: any) => ({
+               name: `${choice.home.name} Vs. ${choice.away.name} ${ choice.league.name === "Boxing" ? boxingEmoji : ufcEmoji}`,
                value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id})
             }))
          );
