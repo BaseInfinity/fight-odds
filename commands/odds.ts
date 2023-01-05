@@ -66,7 +66,7 @@ module.exports = {
                // This logic is similar to getSummary, might be worth throwing this into Matchup class
                await interaction.respond(
                   filtered.map(choice => ({
-                     name: `${choice.home.name} Vs. ${choice.away.name}`,
+                     name: `${choice.home.name} Vs. ${choice.away.name} 🥊`,
                      value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id})
                   }))
                );
