@@ -70,7 +70,7 @@ module.exports = {
                            choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
                      });
 
-                     myCache.set('matchups', choices, 3600);
+                     myCache.set('matchups', choices, 86400);
 
                      if (filtered.length > 25) {
                         // Hack until I add another option to separate Boxing/UFC results
