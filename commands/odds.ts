@@ -49,64 +49,64 @@ module.exports = {
       if (cachedEvents === undefined) {
          axios.get(`https://api.b365api.com/v3/events/inplay?sport_id=9&token=${b365Token}`)
 
-            .then(async function (eventsResponse: { data: { results: any[]; }; }) {
+            .then(async  (eventsResponse: { data: { results: any[]; }; }) => {
                let choices = eventsResponse.data.results.sort((a, b) => a.time - b.time);
 
-               console.log('inplay choices')
-               console.log(choices)
-
                axios.get(`https://api.b365api.com/v3/events/upcoming?sport_id=9&token=${b365Token}`)
-                  .then(async function (eventsResponse: { data: { results: any[]; }; }) {
+                  .then(async  (eventsResponse: { data: { results: any[]; }; }) => {
 
                      choices = choices.concat(eventsResponse.data.results.sort((a, b) => a.time - b.time));
 
-                     console.log('upcoming choices')
-                     console.log(choices)
-
-                     // This filter logic is similar to below but IMO not worth DRYing up unless we need to get
-                     // smarter with filtering
-                     let filtered = choices.filter(choice => {
-                        return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) ||
-                           choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
-                     });
-
                      myCache.set('matchups', choices, 86400);
 
-                     if (filtered.length > 25) {
-                        // Hack until I add another option to separate Boxing/UFC results
-                        filtered = filtered.slice(0, 25)
-                     }
+                     let filteredChoices = this.filterChoices(focusedValue, choices)
 
                      // This logic is similar to getSummary, might be worth throwing this into Matchup class
                      await interaction.respond(
-                        filtered.map(choice => ({
+                        filteredChoices.map((choice: { home: { name: any; }; away: { name: any; }; league: { name: string; }; id: any; }) => ({
                            name: `${choice.home.name} Vs. ${choice.away.name} ${choice.league.name === "Boxing" ? boxingEmoji : ufcEmoji}`,
                            value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id })
                         }))
                      );
                   });
-
             });
 
       } else {
          const choices = cachedEvents
 
-         let filtered = choices.filter((choice: any) => {
-            return choice.home.name.toLowerCase().includes(focusedValue.toLowerCase()) ||
-               choice.away.name.toLowerCase().includes(focusedValue.toLowerCase())
-         });
-
-         if (filtered.length > 25) {
-            // Hack until I add another option to separate Boxing/UFC results
-            filtered = filtered.slice(0, 25)
-         }
+         let filteredChoices = this.filterChoices(focusedValue, choices)
 
          await interaction.respond(
-            filtered.map((choice: any) => ({
+            filteredChoices.map((choice: any) => ({
                name: `${choice.home.name} Vs. ${choice.away.name} ${ choice.league.name === "Boxing" ? boxingEmoji : ufcEmoji}`,
                value: JSON.stringify({ homeName: choice.home.name, awayName: choice.away.name, eventId: choice.id})
             }))
          );
       }
+   },
+   filterChoices(value: string, choices: []): never[] {
+      let filtered = []
+
+      if (value === 'boxing') {
+         filtered = choices.filter((choice: any) => {
+            return choice.league.name.toLowerCase() === value
+         })
+      } else if (value === 'ufc' || value === 'mma') {
+         filtered = choices.filter((choice: any) => {
+            return choice.league.name.toLowerCase() === 'ufc'
+         })
+      } else {
+         filtered = choices.filter((choice: any) => {
+            return choice.home.name.toLowerCase().includes(value.toLowerCase()) ||
+               choice.away.name.toLowerCase().includes(value.toLowerCase())
+         });
+      }
+
+      if (filtered.length > 25) {
+         // Hack until I add another option to separate Boxing/UFC results
+         filtered = filtered.slice(0, 25)
+      }
+
+      return filtered
    }
 };
