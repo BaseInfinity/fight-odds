@@ -19,10 +19,6 @@ export default class Competitor {
       return `${(this.decimalOdds - 1) * 100}/100`;
    }
 
-   public getDecimalOdds() {
-      return this.decimalOdds.toFixed(2)
-   }
-
    public getWinProbability() {
       return `${(100/this.decimalOdds).toFixed(1)}%`
    }
