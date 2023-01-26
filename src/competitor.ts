@@ -15,8 +15,12 @@ export default class Competitor {
       }
    }
 
+   public getBritishOdds() {
+      return `${(this.decimalOdds - 1) * 100}/100`;
+   }
+
    public getDecimalOdds() {
-      return this.decimalOdds
+      return this.decimalOdds.toFixed(2)
    }
 
    public getWinProbability() {
