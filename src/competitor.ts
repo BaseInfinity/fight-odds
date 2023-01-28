@@ -32,6 +32,6 @@ export default class Competitor {
    }
 
    public getReturnWinnings(wagerAmount: number) {
-      return `$${(wagerAmount * this.decimalOdds).toFixed(2)}`
+      return `$${((wagerAmount * this.decimalOdds) - wagerAmount).toFixed(2)}`
    }
 }
