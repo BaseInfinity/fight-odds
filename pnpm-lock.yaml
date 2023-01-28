@@ -5,16 +5,20 @@ specifiers:
   axios: 1.1.3
   discord.js: ^14.7.1
   eslint: ^8.30.0
+  fractional: ^1.0.0
   got: ^12.5.3
   node-cache: ^5.1.2
   ts-node: ^10.9.1
   typescript: ^4.9.4
+  vulgar-fractions: ^1.4.1
 
 dependencies:
   axios: 1.1.3
   discord.js: 14.7.1
+  fractional: 1.0.0
   got: 12.5.3
   node-cache: 5.1.2
+  vulgar-fractions: 1.4.1
 
 devDependencies:
   '@types/node': 18.11.17
@@ -611,6 +615,10 @@ packages:
       mime-types: 2.1.35
     dev: false
 
+  /fractional/1.0.0:
+    resolution: {integrity: sha512-4huGcVdAAr0ffcQ7wQY3dhAdZqKd6QgGOP4Kd7ioNoBAS7GdzolwnqgjH/jTzzCpg71oTLbOVwcOWOH+BmwqvA==}
+    dev: false
+
   /fs.realpath/1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
@@ -1134,6 +1142,10 @@ packages:
   /v8-compile-cache-lib/3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
     dev: true
+
+  /vulgar-fractions/1.4.1:
+    resolution: {integrity: sha512-3CJ0Camc1La9WAWxcZiEDswSYhn2Kb0l7VIOm0+c+/TWNLL6DEUf4l1MrT0U3GAN/C1UiNUlVDMVrctPkc+pQg==}
+    dev: false
 
   /which/2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}

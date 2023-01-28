@@ -10,7 +10,7 @@ export default class MatchUp {
    }
 
    getSummary() {
-       return `\`\`\`${this.home.fullName}: ${this.home.getAmericanOdds()} | ${Number(this.home.decimalOdds).toFixed(2)} | ${this.home.getWinProbability()}
+       return `\`\`\`${this.home.fullName}: ${this.home.getAmericanOdds()} | ${Number(this.home.decimalOdds).toFixed(2)} | ${this.home.getBritishOdds()} | ${this.home.getWinProbability()}
 ${this.away.fullName}: ${this.away.getAmericanOdds()} | ${Number(this.away.decimalOdds).toFixed(2)} | ${this.away.getWinProbability()}\`\`\``
    }
 }
