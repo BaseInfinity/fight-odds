@@ -14,8 +14,7 @@
     "discord.js": "^14.7.1",
     "fractional": "^1.0.0",
     "got": "^12.5.3",
-    "node-cache": "^5.1.2",
-    "vulgar-fractions": "^1.4.1"
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.11.17",

@@ -1,5 +1,4 @@
 var Fraction = require('fractional').Fraction
-import { toDecimal, toVulgar } from 'vulgar-fractions';
 
 export default class Competitor {
    fullName: string
@@ -19,9 +18,8 @@ export default class Competitor {
    }
 
    public getBritishOdds() {
-      // Create a new fraction with the new keyword:
       let fractionalOdds = new Fraction(this.decimalOdds - 1)
-      return toVulgar(this.decimalOdds - 1)
+      return fractionalOdds.toString()
    }
 
    public getWinProbability() {
