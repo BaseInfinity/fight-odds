@@ -19,7 +19,12 @@ export default class Competitor {
 
    public getBritishOdds() {
       let fractionalOdds = new Fraction(this.decimalOdds - 1)
-      return fractionalOdds.toString()
+
+      if (fractionalOdds.denominator === 1) {
+         return `${fractionalOdds}/1`
+      } else {
+         return fractionalOdds.toString()
+      }
    }
 
    public getWinProbability() {
