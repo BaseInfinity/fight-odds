@@ -30,4 +30,8 @@ export default class Competitor {
    public getWinProbability() {
       return `${(100/this.decimalOdds).toFixed(1)}%`
    }
+
+   public getReturnWinnings(wagerAmount: number) {
+      return `$${(wagerAmount * this.decimalOdds).toFixed(2)}`
+   }
 }
