@@ -23,7 +23,7 @@ export default class Competitor {
       if (fractionalOdds.denominator === 1) {
          return `${fractionalOdds}/1`
       } else {
-         return fractionalOdds.toString()
+         return `${fractionalOdds.numerator}/${fractionalOdds.denominator}`
       }
    }
 
