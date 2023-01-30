@@ -87,6 +87,9 @@ module.exports = {
    filterChoices(value: string, choices: []): never[] {
       let filtered = []
 
+      // Make sure we do case insensitive search
+      value = value.toLowerCase()
+
       if (value === 'boxing') {
          filtered = choices.filter((choice: any) => {
             return choice.league.name.toLowerCase() === value
