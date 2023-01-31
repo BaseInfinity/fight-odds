@@ -12,6 +12,14 @@ sudo npm install -g pnpm
 
 gh repo clone BaseInfinity/fight-odds
 
+
+https://user-images.githubusercontent.com/1424113/215631160-60aad911-2f96-4295-9061-49f83b940bcd.mov
+
+
+
+https://user-images.githubusercontent.com/1424113/215631160-60aad911-2f96-4295-9061-49f83b940bcd.mov
+
+
 pnpm install
 
 sudo npm install -g ts-node
