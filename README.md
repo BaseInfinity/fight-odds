@@ -1,4 +1,6 @@
 # fight-odds
+https://top.gg/bot/1053113817040695357
+
 Get Live Fighting Odds and Win Chance % for Boxing and UFC Events
 
 
@@ -11,14 +13,6 @@ Installation instructions if you want to run your own bot, but tweak the setting
 sudo npm install -g pnpm
 
 gh repo clone BaseInfinity/fight-odds
-
-
-https://user-images.githubusercontent.com/1424113/215631160-60aad911-2f96-4295-9061-49f83b940bcd.mov
-
-
-
-https://user-images.githubusercontent.com/1424113/215631160-60aad911-2f96-4295-9061-49f83b940bcd.mov
-
 
 pnpm install
 
