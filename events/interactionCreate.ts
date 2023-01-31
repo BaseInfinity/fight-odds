@@ -3,6 +3,7 @@ const { Events } = require('discord.js');
 
 module.exports = {
    name: Events.InteractionCreate,
+
    async execute(interaction: any) {
       const command = interaction.client.commands.get(interaction.commandName);
 
@@ -13,9 +14,9 @@ module.exports = {
 
       try {
          if (interaction.isChatInputCommand()) {
-               await command.execute(interaction);
+            await command.execute(interaction);
          } else if (interaction.isAutocomplete()) {
-               await command.autocomplete(interaction);
+            await command.autocomplete(interaction);
          }
       } catch (error) {
          console.error(`Error executing ${interaction.commandName}`);

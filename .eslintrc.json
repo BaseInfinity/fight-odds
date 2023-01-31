@@ -1,5 +1,5 @@
 {
-	"extends": "eslint:recommended",
+	"extends": "standard",
 	"env": {
 		"node": true,
 		"es6": true
@@ -18,7 +18,7 @@
 		"curly": ["error", "multi-line", "consistent"],
 		"dot-location": ["error", "property"],
 		"handle-callback-err": "off",
-		"indent": ["error", 3],
+		"indent": ["error", "tab", 1],
 		"keyword-spacing": "error",
 		"max-nested-callbacks": ["error", { "max": 4 }],
 		"max-statements-per-line": ["error", { "max": 2 }],
