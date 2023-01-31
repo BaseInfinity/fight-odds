@@ -1,5 +1,8 @@
 # fight-odds
-https://top.gg/bot/1053113817040695357
+<a href="https://top.gg/bot/1053113817040695357">
+  <img src="https://top.gg/api/widget/owner/1053113817040695357.svg">
+</a>
+
 
 Get Live Fighting Odds and Win Chance % for Boxing and UFC Events
 
