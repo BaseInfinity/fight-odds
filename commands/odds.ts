@@ -20,21 +20,38 @@ module.exports = {
 
    async execute(interaction: any) {
       const matchup = JSON.parse(interaction.options.getString('matchup'))
-
         // Find the odds for given matchup/event
       axios.get(`https://api.b365api.com/v2/event/odds?token=${b365Token}&event_id=${matchup.eventId}`)
          .then(function(oddsResponse: any) {
-            const allOdds = oddsResponse.data.results.odds['9_1'];
+            const eventOdds = oddsResponse.data.results.odds
 
-            // Simple sort to make sure we always return the latest odds for an event as they change over time
-            const latestOdds = allOdds.sort((a: any, b: any) => b.add_time - a.add_time)[0]
+            // If odds don't exist, attempt to pull them from known cache and bail
+            // Point of this is to short circuit ASAP
+            if (Object.keys(eventOdds).length === 0) {
+               const cachedOdds = myCache.get(matchup.eventId);
 
-            const matchUp = new MatchUp(
-               new Competitor(matchup.homeName, latestOdds.home_od),
-               new Competitor(matchup.awayName, latestOdds.away_od),
-            )
+               if (cachedOdds !== undefined) {
+                  interaction.reply(myCache.get(matchup.eventId).getSummary())
+               } else {
+                  interaction.reply({ content: 'Odds not found. Please try again. If you continue to have problems, please report', ephemeral: true })
+               }
+            // Grab latest results
+            } else {
+               const allOdds = oddsResponse.data.results.odds['9_1'];
 
-            interaction.reply(matchUp.getSummary())
+               // Simple sort to make sure we always return the latest odds for an event as they change over time
+               const latestOdds = allOdds.sort((a: any, b: any) => b.add_time - a.add_time)[0]
+
+               const matchUp = new MatchUp(
+                  new Competitor(matchup.homeName, latestOdds.home_od),
+                  new Competitor(matchup.awayName, latestOdds.away_od),
+               )
+
+               // Sometimes the odds disappear when the event is over, so lets cache it
+               myCache.set(matchup.eventId, matchUp, 86400)
+
+               interaction.reply(matchUp.getSummary())
+            }
          });
    },
    async autocomplete(interaction: any) {
