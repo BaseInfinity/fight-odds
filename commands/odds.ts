@@ -20,6 +20,7 @@ module.exports = {
 
    async execute(interaction: any) {
       const matchup = JSON.parse(interaction.options.getString('matchup'))
+
         // Find the odds for given matchup/event
       axios.get(`https://api.b365api.com/v2/event/odds?token=${b365Token}&event_id=${matchup.eventId}`)
          .then(function(oddsResponse: any) {

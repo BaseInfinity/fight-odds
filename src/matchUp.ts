@@ -1,4 +1,5 @@
 import Competitor from "./competitor"
+import Formatter from "./formatter"
 
 export default class MatchUp {
    home: Competitor
@@ -10,7 +11,17 @@ export default class MatchUp {
    }
 
    getSummary() {
-       return `\`\`\`${this.home.fullName}: ${this.home.getWinProbability()} | ${this.home.getAmericanOdds()} | ${Number(this.home.decimalOdds).toFixed(2)} | ${this.home.getBritishOdds()} | ${this.home.getReturnWinnings(100)}
-${this.away.fullName}: ${this.away.getWinProbability()} | ${this.away.getAmericanOdds()} | ${Number(this.away.decimalOdds).toFixed(2)} | ${this.away.getBritishOdds()} | ${this.away.getReturnWinnings(100)}\`\`\``
+      const data = [
+         this.home.simpleJson(),
+         this.away.simpleJson(),
+      ];
+
+      const columnWidths = Formatter.getColumnWidths(data);
+      const keys = Object.keys(data[0]);
+
+      return `\`\`\`
+${Formatter.createRow(data[0], columnWidths, keys)}
+${Formatter.createRow(data[1], columnWidths, keys)}
+\`\`\``
    }
 }

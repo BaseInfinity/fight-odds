@@ -34,4 +34,15 @@ export default class Competitor {
    public getReturnWinnings(wagerAmount: number) {
       return `$${((wagerAmount * this.decimalOdds) - wagerAmount).toFixed(2)}`
    }
+
+   public simpleJson() {
+      return {
+         fullName: this.fullName,
+         winProbability: this.getWinProbability(),
+         americanOdds: this.getAmericanOdds(),
+         decimalOdds: this.decimalOdds,
+         britishOdds: this.getBritishOdds(),
+         simpleWin: this.getReturnWinnings(100),
+      }
+   }
 }
