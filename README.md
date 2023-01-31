@@ -7,7 +7,7 @@
 Get Live Fighting Odds and Win Chance % for Boxing and UFC Events
 
 
-https://user-images.githubusercontent.com/1424113/215630297-7d720274-7301-4c3c-af25-ed6d3bbb03be.mov
+https://user-images.githubusercontent.com/1424113/215885742-a334026e-e263-432d-a4ff-4d1cd987ebd7.mov
 
 
 Installation instructions if you want to run your own bot, but tweak the settings! Also be sure to add your own `config.json` =)
