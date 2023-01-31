@@ -11,6 +11,6 @@ export default class MatchUp {
 
    getSummary() {
        return `\`\`\`${this.home.fullName}: ${this.home.getWinProbability()} | ${this.home.getAmericanOdds()} | ${Number(this.home.decimalOdds).toFixed(2)} | ${this.home.getBritishOdds()} | ${this.home.getReturnWinnings(100)}
-${this.away.fullName}: ${this.away.getWinProbability()} | ${this.away.getAmericanOdds()} | ${Number(this.away.decimalOdds).toFixed(2)} | ${this.away.getBritishOdds()} | ${this.away.getWinProbability()} | ${this.away.getReturnWinnings(100)}\`\`\``
+${this.away.fullName}: ${this.away.getWinProbability()} | ${this.away.getAmericanOdds()} | ${Number(this.away.decimalOdds).toFixed(2)} | ${this.away.getBritishOdds()} | ${this.away.getReturnWinnings(100)}\`\`\``
    }
 }
