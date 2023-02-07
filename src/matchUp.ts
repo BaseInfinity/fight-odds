@@ -21,7 +21,7 @@ export default class MatchUp {
 				{ name: '🇺🇸', value: `${this.home.getAmericanOdds()}`, inline: true },
 				{ name: '🇪🇺', value: `${Number(this.home.decimalOdds).toFixed(2)}`, inline: true },
 				{ name: '🇬🇧', value: `${this.home.getBritishOdds()}`, inline: true },
-				{ name: 'Over/Under', value: `N/A`, inline: true },
+				{ name: 'O/U', value: `N/A`, inline: true },
 				{ name: 'Bet $100', value: `${this.home.getReturnWinnings(100)}`, inline: true },
 				{ name: '\u200b', value: '\u200b', inline: false },
 				{ name: 'Fighter', value: `${this.away.fullName}` },
@@ -29,7 +29,7 @@ export default class MatchUp {
 				{ name: '🇺🇸', value: `${this.away.getAmericanOdds()}`, inline: true },
 				{ name: '🇪🇺', value: `${Number(this.away.decimalOdds).toFixed(2)}`, inline: true },
 				{ name: '🇬🇧', value: `${this.away.getBritishOdds()}`, inline: true },
-				{ name: 'Over/Under', value: `N/A`, inline: true },
+				{ name: 'O/U', value: `N/A`, inline: true },
 				{ name: 'Bet $100', value: `${this.away.getReturnWinnings(100)}`, inline: true },
 			)
 
