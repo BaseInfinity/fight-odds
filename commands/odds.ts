@@ -51,7 +51,7 @@ module.exports = {
                // Sometimes the odds disappear when the event is over, so lets cache it
                myCache.set(matchup.eventId, matchUp, 86400)
 
-               interaction.reply(matchUp.getSummary())
+               interaction.reply({embeds: [matchUp.getSummary()]})
             }
          });
    },
