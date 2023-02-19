@@ -28,7 +28,7 @@ module.exports = {
 
             // If odds don't exist, attempt to pull them from known cache and bail
             // Point of this is to short circuit ASAP
-            if (Object.keys(eventOdds).length === 0) {
+            if (Object.keys(eventOdds).length === 0 || eventOdds['9_1'][0].home_id === '-') {
                const cachedOdds = myCache.get(matchup.eventId);
 
                if (cachedOdds !== undefined) {
